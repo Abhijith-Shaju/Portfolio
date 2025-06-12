@@ -1,0 +1,110 @@
+/* -----  TaskBar  ----- */
+
+.taskbar{
+    position: fixed;
+    height: 3vh;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, #245DDA 80%, #8da3d3);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.25vh;
+    z-index: 1000;
+}
+
+.taskbar-start{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: clamp(9vh, 9vh, 9vh);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #238d3a;
+    cursor: pointer;
+
+    font-weight: 600;
+    color: white;
+    font-size: 2vh;
+}
+
+
+.taskbar-start::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: #238d3a;
+  border-radius: 50%;
+  z-index: -1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+.taskbar-apps{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3vh;
+    width: 80%;
+}
+
+.taskbar-apps img{
+    height: 3vh;
+    width: 3vh;
+    margin: 0 1vh;
+    cursor: pointer;
+} 
+
+
+.taskbar-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: clamp(3vh, 15vh, 15vh);
+    border-radius: 5%;
+    border: black 1px solid;
+    cursor: pointer;
+    margin-right: 1px;
+    background: linear-gradient(to top, #4082ad 80%, #8da3d3);
+
+}
+
+.taskbar-app:hover {
+    background-color: #777;
+}
+
+
+.taskbar-time{
+    position: absolute;
+    top: 0;
+    right: 2vw;
+    color: white;
+    font-size: 1.75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    height: 100%;
+}
+
+/* logo */
+
+.logo {
+    width: 2.5vh;
+    height: 2.5vh;
+    margin: 0.5vh 0.5vh 0.5vh 0.5vh;
+    background-image: url('../images/logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
