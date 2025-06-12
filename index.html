@@ -5,22 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="resources/styles/taskbar.css">
+    <link rel="stylesheet" href="resources/styles/loader.css">
+
 </head>
-<body>
+<body class="loading">
+    <div id="loader-wrapper" class="loader-wrapper">
+        <div class="loader-logo">
+            <div class="logo-grid">
+                <div class="square top-left"></div>
+                <div class="square top-right"></div>
+                <div class="square bottom-left"></div>
+                <div class="square bottom-right"></div>
+            </div>
+            <div class="loader-text">
+                <div>Portfolio<span class="os">OS</span></div>
+                <div class="loader-text-sub">DevXP</div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="desktop">
-        <div id="about-icon"  class="apps">
+        <div id="about-icon"  class="apps" onclick="openApp('about')">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Desktop Icon">
             <h1>About</h1>
         </div>
-        <div id="projects-icon"  class="apps">
-        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Desktop Icon">
-        <h1>Projects</h1>
+        <div id="projects-icon"  class="apps" onclick="openApp('projects')">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Desktop Icon">
+            <h1>Projects</h1>
         </div>
-        <div id="skills-icon"  class="apps">
+        <div id="skills-icon"  class="apps" onclick="openApp('skills')">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Desktop Icon">
             <h1>skills</h1>
         </div>
-        <div id="contact-icon"  class="apps">
+        <div id="contact-icon"  class="apps" onclick="openApp('contact')">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Desktop Icon">
             <h1>contact</h1>
         </div>
@@ -28,7 +47,9 @@
 
     <div id="about"  class="app-window" tabindex="0">
         <div class="app-window-navigation">
-            <span class="minimize">-</span><span class="restore">D</span><span class="close">X</span>
+            <span class="minimize" data-window="about">-</span>
+            <span class="restore" data-window="about">□</span>
+            <span class="close" data-window="about" onclick="closeApp('about')">✕</span>
         </div>
         <div class="app-window-content">
             <h1>About Me</h1>
@@ -38,7 +59,9 @@
     </div>
     <div id="projects"  class="app-window" tabindex="0">
         <div class="app-window-navigation">
-            <span class="minimize">-</span><span class="restore">D</span><span class="close">X</span>
+            <span class="minimize" data-window="projects">-</span>
+            <span class="restore" data-window="projects">□</span>
+            <span class="close" data-window="projects" onclick="closeApp('projects')">✕</span>
         </div>
         <div class="app-window-content">
             <h1>Projects</h1>
@@ -52,7 +75,9 @@
     </div>
     <div id="skills"  class="app-window" tabindex="0">
         <div class="app-window-navigation">
-            <span class="minimize">-</span><span class="restore">D</span><span class="close">X</span>
+            <span class="minimize" data-window="skills">-</span>
+            <span class="restore" data-window="skills">□</span>
+            <span class="close" data-window="skills" onclick="closeApp('skills')">✕</span>
         </div>
         <div class="app-window-content">
             <h1>Skills</h1>
@@ -66,30 +91,40 @@
             </ul>
         </div>
     </div>
-    <div id="contact"  class="app-window" tabindex="0">
+    <div id="contact" class="app-window" tabindex="0">
         <div class="app-window-navigation">
-            <span class="minimize">-</span><span class="restore">D</span><span class="close">X</span>
+            <span class="minimize" data-window="contact">-</span>
+            <span class="restore" data-window="contact">□</span>
+            <span class="close" data-window="contact" onclick="closeApp('contact')">✕</span>
         </div>
         <div class="app-window-content">
             <h1>Contact</h1>
             <p>If you'd like to get in touch, you can reach me at:</p>
             <ul>
-                <li>Email: <a href="mailto:abhijithshaju2004@gmail.com">
+                <li>Email: <a href="mailto:abhijithshaju2004@gmail.com">abhijithshaju2004@gmail.com
                     </a></li></ul>
         </div>
     </div>
 
-    <div class="taskbar">
-        <div class="taskbar-apps">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Windows Icon">
-            <img id="about_taskbar" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="App Icon">
-            <img id="projects_taskbar" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="App Icon">
-            <img id="skills_taskbar" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="App Icon">
-            <img id="contact_taskbar" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="App Icon">
+    <div id="start-menu" class="start-menu">
+        <div class="start-menu-header">
+            <h2>Admin User</h2>
         </div>
+        <div class="start-menu-content">
+            <div class="start-menu-left"></div>
+            <div class="start-menu-right"></div>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <div id="taskbar-start" class="taskbar-start">
+            <div class="logo">
+            </div>
+            <i>start</i>
+        </div>
+        <div id="taskbar-list" class="taskbar-apps"></div>
         <div class="taskbar-time">    
             <p id="time"></p>
-            <p id="date"></p>
         </div>
     </div>
 </body>
@@ -99,8 +134,8 @@
 <script>
     function updateClock() {
         const now = new Date();
-        document.getElementById("time").textContent = now.toLocaleTimeString();
-        document.getElementById("date").textContent = now.toLocaleDateString();
+        document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+        // document.getElementById("date").textContent = now.toLocaleDateString();
     }
 
     // Update every second and store the interval ID
@@ -109,6 +144,10 @@
     // Call immediately to avoid initial delay
     updateClock();
 </script>
+
+<script src="resources/scripts/loader.js"></script>
 <script src="script.js"></script>
+<script src="resources/scripts/taskbar.js"></script>
+
 
 </html>
